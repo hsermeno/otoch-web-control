@@ -1,0 +1,64 @@
+#
+#	Copyright 2012 Humberto Sermeño
+#	
+#	This file is part of Otoch.
+#
+#    Foobar is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    Foobar is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+controladores:
+  sala:
+    name: sala
+    title: Sala
+    host: 192.168.0.10
+    port: 23
+    switches:
+      garage: 1
+      entrada: 3
+      sala-1: 4
+      sala-2: 2
+      sala-3: 0
+      comedor: 5
+    cmd:
+      apagar-todo: '-'
+      encender-todo: '+'
+      status: 'S'
+
+switches:
+  sala:
+      sala:
+          - sala-1
+          - sala-2
+  toda-sala:
+      sala:
+          - sala-1
+          - sala-2
+          - sala-3
+
+comandos:
+  pelicula:
+    - sala:sala-1:on
+    - sala:sala-2:off
+    - sala:sala-3:off
+  apagar-todo:
+    - sala::apagar-todo
+  encender-todo:
+    - sala::encender-todo
+  status:
+    - sala::status
+    
+interfaz:
+    luces:
+        title: Luces
+        comandos: [ garage, entrada, 'toda-sala' ]

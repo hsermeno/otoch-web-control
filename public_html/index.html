@@ -1,0 +1,162 @@
+<!--
+	Copyright 2012 Humberto Sermeño
+	
+	This file is part of Otoch.
+
+    Foobar is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Foobar is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<title>Luces</title> 
+	
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="viewport" content="initial-scale=1"> 
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+	<link rel="stylesheet" href="css/house-automation.min.css" />
+	<link rel="stylesheet" href="css/jquery.mobile-1.2.0.min.css" />
+	<style>
+	@media only screen and (max-width: 480px) {
+	    .ui-field-contain label.ui-slider {
+	        display: inline-block;
+	        vertical-align: top;
+	        width: 68%;
+	        margin: 2% 2% 0 0;
+	    }
+	}
+	/*
+	li.loading {
+	    background-color: black;
+	    color: white;
+	}
+	*/
+	div.ui-slider.ui-focus,
+	div.ui-slider .ui-btn:focus {
+	    -moz-box-shadow: none;
+	    -webkit-box-shadow: none;
+	    box-shadow: none;
+	}
+	</style>
+</head> 
+<body> 
+
+<div data-role="page">
+	<div data-role="header" data-theme="a">
+		<h1>Luces</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<ul data-role="listview">
+		    <li>
+		        <a href="#switches">
+		            <h3>Switches</h3>
+		            <p>Controlar switch individuales</p>
+		        </a>
+		    </li>
+		    <li>
+		        <a href="#comandos">
+		            <h3>Comandos</h3>
+		            <p>Ejecutar una serie predefinida de estados de switch</p>
+		        </a>
+		    </li>
+		</ul>	
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+<div data-role="page" id="switches" data-add-back-btn="true">
+    
+    <div data-role="header" data-position="fixed">
+        <h1>Switches</h1>
+    </div><!-- /header -->
+    
+	<div data-role="content">	
+		<ul data-role="listview">
+		    <li data-role="list-divider" role="heading">Garage</li>
+		    <li data-role="fieldcontain">
+		        <label for="switch-garage" id="switch-garage-label">Garage</label>
+		        <select name="switch-garage" id="switch-garage" data-role="slider" data-mini="true" data-action="sala:garage">
+		            <option value="off">Off</option>
+		            <option value="on">On</option>
+		        </select>
+		    </li>
+		    <li data-role="fieldcontain">
+		        <label for="switch-entrada" id="switch-entrada-label">Puerta</label>
+		        <select name="switch-entrada" id="switch-entrada" data-role="slider" data-mini="true" data-action="sala:entrada">
+		            <option value="off">Off</option>
+		            <option value="on">On</option>
+		        </select>
+		    </li>
+		    <li data-role="list-divider" role="heading">Sala</li>
+		    <li data-role="fieldcontain">
+		        <label for="switch-sala-1" id="switch-sala-1-label">Entrada</label>
+		        <select name="switch-sala-1" id="switch-sala-1" data-role="slider" data-mini="true" data-action="sala:sala-1">
+		            <option value="off">Off</option>
+		            <option value="on">On</option>
+		        </select>
+		    </li>
+		    <li data-role="fieldcontain">
+		        <label for="switch-sala-2" id="switch-sala-2-label">Doble</label>
+		        <select name="switch-sala-2" id="switch-sala-2" data-role="slider" data-mini="true" data-action="sala:sala-2">
+		            <option value="off">Off</option>
+		            <option value="on">On</option>
+		        </select>
+		    </li>
+		    <li data-role="fieldcontain">
+		        <label for="switch-sala-3" id="switch-sala-3-label">Pasillo</label>
+		        <select name="switch-sala-3" id="switch-sala-3" data-role="slider" data-mini="true" data-action="sala:sala-3">
+		            <option value="off">Off</option>
+		            <option value="on">On</option>
+		        </select>
+		    </li>
+		    <li data-role="list-divider" role="heading">Comedor</li>
+		    <li data-role="fieldcontain">
+		        <label for="switch-comedor" id="switch-comedor-label">Comedor</label>
+		        <select name="switch-comedor" id="switch-comedor" data-role="slider" data-mini="true" data-action="sala:comedor">
+		            <option value="off">Off</option>
+		            <option value="on">On</option>
+		        </select>
+		    </li>
+		</ul>		
+	</div><!-- /content -->
+	
+</div><!-- /page -->
+
+<div data-role="page" id="comandos" data-add-back-btn="true">
+    
+    <div data-role="header" data-position="fixed">
+        <h1>Comandos</h1>
+    </div><!-- /header -->
+    
+	<div data-role="content">	
+		<div data-role="controlgroup" data-ajax="false">
+		    <a href="#" data-role="button" data-action="pelicula">Peliculas</a>
+		</div>
+        <div data-role="controlgroup" data-ajax="false">
+		    <a href="#" data-role="button" data-action="encender-todo">Encender Todo</a>
+		    <a href="#" data-role="button" data-action="apagar-todo">Apagar Todo</a>
+		</div>		
+	</div><!-- /content -->
+	
+</div><!-- /page -->
+
+<script src="js/jquery-1.8.2.min.js"></script>
+<script src="js/jquery.mobile-1.2.0.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/behavior.js"></script>
+
+</body>
+</html>
