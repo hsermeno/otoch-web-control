@@ -48,6 +48,14 @@ function requestHandler(request, response) {
 	var uri = require('url').parse(request.url, true).pathname,
 	    filename = path.join(www_path, uri);
 
+	if (uri.indexOf('/do') == 0) {
+		controllers.do(uri, function(stat) {
+			io.sockets.emit('status', stat);
+		});
+		response.writeHead(200);
+		response.end();
+	}
+
     if (cliArgs.cache && cache[uri]) {
         console.log("Serving from Cache: " + uri);
         response.writeHead(200);

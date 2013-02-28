@@ -98,5 +98,27 @@ module.exports = {
 		}
 		
 		return true;
+	},
+	
+	do: function(what, callback) {
+		var stat = false;
+		var parts = what.split('/');
+		
+		try {
+			if (parts.length >= 5) {
+				// 0 - blank, 1 - do, 2 - what, 3 - controller, 4 - status 
+				switch (parts[2]) {
+				case 'update':
+					stat = config.translateStatus(parts[4], parts[3]);
+					break;
+				}
+			}
+		} catch (error) {
+			console.log('ERROR: ' + error);
+		}
+		
+		if (stat !== false) {
+			callback(stat);
+		}
 	}
 };
