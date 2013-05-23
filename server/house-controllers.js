@@ -23,8 +23,6 @@ var net = require('net'),
     path = require('path'),
     config = require('./config');
 
-config.init();
-
 module.exports = {
 	callback: null,
 	connection_count: 0,

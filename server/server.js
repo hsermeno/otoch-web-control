@@ -21,13 +21,16 @@ var app = require("http").createServer(requestHandler),
     path = require("path"),
     fs = require('fs'),
     io = require('socket.io').listen(app),
-    
-    www_path = path.join(process.cwd(), '../public_html/'),
+    config = require(__dirname + '/config'),
+    www_path = __dirname + '/../public_html/',
     controllers = require('./house-controllers'),
     cache = {},
     cliArgs = require('optimist').argv;
 
-app.listen(8888);
+config.init().done(function() {
+    app.listen(8888);    
+});
+
 io.sockets.on('connection', function(socket) {
     socket.on('do', function(data) {
         if (!controllers.execute(data.cmd, function(stat) {

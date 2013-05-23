@@ -16,7 +16,14 @@
     You should have received a copy of the GNU General Public License
     along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 */
-var controllers = require('./house-controllers');
+var config = require(__dirname + '/config'),
+    controllers = require(__dirname + '/house-controllers');
 
-controllers.execute(process.argv[2]);
+config.init().done(function() {
+    controllers.execute(process.argv[2], function() {
+        console.log('done');
+        process.exit(0);
+    });
+});
+
 

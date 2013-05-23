@@ -17,11 +17,11 @@
     along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-var path = require('path'),
-	fs = require('fs'),
-	yaml = require('js-yaml');
+var fs = require('fs'),
+	yaml = require('js-yaml'),
+    q = require('q');
 
-var configFilename = path.join(process.cwd(), 'config.yml');
+var configFilename = __dirname + '/config.yml';
 
 module.exports = {
     config: null,
@@ -36,18 +36,20 @@ module.exports = {
 
 	init: function()
 	{
-		this._loadConfig();
-		
 		// monitor config file changes
 		fs.watchFile(configFilename, function(curr, prev){
 			if (curr.mtime !== prev.mtime) {
+                console.log('Reloading configuration file');
 				this._loadConfig();
 			}
 		});
+		return this._loadConfig();
 	},
 
 	_loadConfig: function()
 	{
+        var deferred = q.defer();
+        
 	    var that = this;
 		fs.readFile(configFilename, 'utf8', function(err, data) {
 			if (err) {
@@ -55,7 +57,9 @@ module.exports = {
 			}
 			
 			that.config = yaml.load(data);
-						
+			
+            if (!that.config) console.log('ash!');
+            
 	        for (var controllerKey in that.config.controladores) {
 	            for (var switchKey in that.config.controladores[controllerKey].switches) {
 	                var switchNumber = that.config.controladores[controllerKey].switches[switchKey];
@@ -65,7 +69,11 @@ module.exports = {
 
 			// invalidate the command cache
 			that.cache = {};
+            
+            deferred.resolve();
 		});
+        
+        return deferred.promise;
 	},
 
 	translateControllerSwitch: function(controller, name, value) 
