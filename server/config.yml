@@ -25,11 +25,11 @@ controladores:
     port: 23
     switches:
       garage: 1
-      entrada: 3
-      sala-1: 4
-      sala-2: 2
-      sala-3: 0
-      comedor: 5
+      entrada: 0
+      sala-1: 2
+      sala-2: 3  
+      sala-3: 5 
+      comedor: 4
     cmd:
       apagar-todo: '-'
       encender-todo: '+'
